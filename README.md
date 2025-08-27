@@ -1,165 +1,123 @@
-Truck Fleet Manager (Java Swing)
-A desktop application built with Java Swing to manage and report on three common truck categories in Brazilian logistics: VUC, TOCO, and TRUCK. It showcases robust CRUD operations, responsive reporting via JTable, clean patterns, and a frictionless UX for desktop.
+# Truck Fleet Manager (Java Swing)
 
-This project is production-ready for demos and portfolio use. It reflects strong proficiency in:
+![Java](https://img.shields.io/badge/Java-8%2B-blue) ![Swing](https://img.shields.io/badge/UI-Swing-orange) ![Build](https://img.shields.io/badge/Build-NetBeans%2012%2B-blueviolet) ![License](https://img.shields.io/badge/License-MIT-green)
 
-Java SE and Swing with NetBeans GUI Builder (GroupLayout)
-Design patterns (Singleton per Form)
-Data validation and exception handling
-Thoughtful desktop UX (window lifecycle, sizing, focus, single-instance forms)
-Clean separation of concerns: model, in-memory repository, and UI
-Table of Contents
-Overview
-Features
-Architecture and Design Decisions
-Project Structure
-Requirements
-Getting Started
-Usage Guide
-Data Model
-Troubleshooting
-Roadmap
-License
-Author
-Overview
-The application provides a main window (FormPrincipal) as the navigation hub:
+A robust desktop application built with Java Swing for managing a comprehensive truck fleet registry. The system is segmented by vehicle category (VUC, Toco, and Truck) and implements a professional workflow, including CRUD operations, dynamic reporting, and a clean, extensible architecture.
 
-Registrations: VUC, TOCO, TRUCK
-Reports: VUC, TOCO, TRUCK (each with a dedicated JTable)
-All data is stored in memory through simple repository classes, making the app lightweight and easy to run. Reports reflect the latest state via an explicit table refresh method.
+This project serves as an excellent portfolio piece, demonstrating proficiency in:
+- **Java SE & Swing** with the NetBeans GUI Builder.
+- **Design Patterns** (Singleton, Simplified MVC).
+- **Data Validation** and custom exception handling.
+- **Desktop-centric UX**, including proper window lifecycle management and real-time component updates.
 
-Features
-Full CRUD for:
-VUC (Veículo Urbano de Carga)
-TOCO
-TRUCK
-Reporting by category:
-On-demand refresh via atualizarTabela()
-Purpose-built column sets per vehicle type
-Validation and error handling:
-Year validation (InvalidAnoException)
-Capacity/autonomy validation where applicable (InvalidCapacidadeException)
-Numeric parsing with user feedback
-Polished desktop UX:
-Forms use DISPOSE_ON_CLOSE (closing a child window doesn’t exit the app)
-The main window uses EXIT_ON_CLOSE
-After a successful save, the registration form closes automatically
-Forms are centered and correctly sized with pack()
-Architecture and Design Decisions
-Singleton per Form
-Prevents multiple instances of the same registration/report window
-Examples: FormVuc.getInstance(), FormRelToco.getInstance(), etc.
-Clear separation of responsibilities:
-Model: Vuc, Toco, Truck
-In-memory repositories: BDVuc, BDToco, BDTruck
-UI: FormPrincipal, FormVuc, FormToco, FormTruck, FormRelVuc, FormRelToco, FormRelTruck
-Reporting with explicit refresh:
-Open reports using FormRelXxx.getInstance().atualizarTabela().setVisible(true)
-Correct window lifecycle:
-Only FormPrincipal uses EXIT_ON_CLOSE
-All other forms use DISPOSE_ON_CLOSE
-Built using NetBeans GUI Builder:
-GroupLayout managed within initComponents()
-Correct sizing via pack()
-Project Structure
-Example layout (your IDE may display differently):
+---
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Features](#features)
+- [Architecture and Design Decisions](#architecture-and-design-decisions)
+- [Screenshots](#screenshots)
+- [Technologies Used](#technologies-used)
+- [Getting Started](#getting-started)
+- [Future Roadmap](#future-roadmap)
+- [License](#license)
+- [Author](#author)
+
+---
+
+## Overview
+
+The application's navigation is centralized in a main window (`FormPrincipal`), which acts as a hub for accessing the **Registration** and **Reporting** modules. Each truck category has its own dedicated CRUD form and report screen, ensuring an organized and intuitive interface. Data is managed in-memory for agility and ease of execution.
+
+## Features
+
+- **Full CRUD Operations**:
+  - Create, Read, Update, and Delete for VUC, Toco, and Truck vehicles.
+- **Dynamic Reporting**:
+  - `JTable` reports that are updated in real-time whenever the report screen is accessed.
+- **Input Validation**:
+  - Custom exception handling for invalid data entries (e.g., year, capacity).
+  - User-friendly feedback via `JOptionPane` for errors and confirmations.
+- **Optimized User Experience (UX)**:
+  - **Window Management**: Only the main window exits the application (`EXIT_ON_CLOSE`), while child forms are disposed (`DISPOSE_ON_CLOSE`), preserving the workflow.
+  - **Fluid Navigation**: After a successful save, the registration form closes automatically.
+  - **Responsive Layout**: Windows automatically resize to fit their content using the `pack()` method.
+
+## Architecture and Design Decisions
+
+- **Singleton Pattern**: Each `JFrame` is implemented as a Singleton to ensure only one instance of each window is active at any time, preventing duplicates and conserving resources.
+- **Separation of Concerns**:
+  - **Model**: Domain classes (`Vuc`, `Toco`, `Truck`) representing the data.
+  - **View**: Swing forms (`FormVuc`, `FormRelToco`, etc.) responsible for the UI.
+  - **Controller/Repository (Simplified)**: "Database" classes (`BDVuc`, `BDToco`) that manage the in-memory object collections and contain business logic.
+- **On-Demand UI Updates**: Reports are repopulated via the `atualizarTabela()` method, which is explicitly called before displaying the window, ensuring data is always synchronized.
+
+## Screenshots
+
+> **Note:** Create a folder named `assets` or `docs/images` in your project's root directory and place your screenshots there. Then, update the file paths below accordingly.
+
+| Main Window | VUC Registration |
+| :---: | :---: |
+| ![Main Window](assets/main-window.png) | ![VUC Registration Form](assets/form-vuc.png) |
+
+| Toco Report | Truck Report |
+| :---: | :---: |
+| ![Toco Report](assets/report-toco.png) | ![Truck Report](assets/report-truck.png) |
+
+## Technologies Used
+
+- **Java SE 11+**
+- **Java Swing** for the graphical user interface.
+- **NetBeans IDE 12+** with its GUI Builder.
+
+## Getting Started
+
+### Prerequisites
+
+- **JDK 8** or higher installed.
+- **Apache NetBeans** (recommended for opening the project and viewing the UI design).
+
+### Running the Project
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/ricardomarchezan/TruckSystemRegister.git
+2. **Open in NetBeans:**
+   - Go to `File > Open Project` and select the cloned project folder.
+3. **Clean and Build:**
+   - Right-click on the project in the Projects pane and select `Clean and Build`.
+4. **Run:**
+   - Locate the `FormPrincipal.java` file.
+   - Right-click on it and choose `Run File`.
+
+---
 
 
-/src
-  FormPrincipal.java
-  FormVuc.java
-  FormToco.java
-  FormTruck.java
-  FormRelVuc.java
-  FormRelToco.java
-  FormRelTruck.java
-  Vuc.java
-  Toco.java
-  Truck.java
-  BDVuc.java
-  BDToco.java
-  BDTruck.java
-  InvalidAnoException.java
-  InvalidCapacidadeException.java
-Notes:
+---
 
-Repositories (BD*) keep data in memory with methods: inserir, consultar, atualizar, excluir, listarTodos.
-Report forms implement atualizarTabela() to populate the JTable from listarTodos().
-Requirements
-JDK 8+ (Java 11+ recommended)
-Any IDE; NetBeans 12+ recommended for GUI Builder
-Useful links:
+## Future Roadmap
 
-AdoptOpenJDK/Temurin: https://adoptium.net
-Apache NetBeans: https://netbeans.apache.org
-Getting Started
-Option A — Run from IDE (recommended):
+- [ ] **Data Persistence**: Migrate from in-memory storage to a database (SQLite, H2) using JDBC.
+- [ ] **Report Exporting**: Add functionality to export tables to formats like CSV or PDF.
+- [ ] **Unit Testing**: Implement tests with JUnit for the model and repository classes.
+- [ ] **Filtering and Sorting**: Add search filters and column-sorting capabilities to the report tables.
+- [ ] **UI/UX Enhancements**: Implement input masks (e.g., for license plates) and a more modern Look & Feel.
 
-Open the project in NetBeans.
-Build the project (Clean and Build).
-Run the main class: FormPrincipal.
-Option B — Run from terminal (simple case without packages):
+---
 
-Navigate to the src directory and compile:
+## License
 
-javac *.java
-Run the main class:
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
-java FormPrincipal
-If you use packages (package declarations), adjust the compile/run commands accordingly.
+---
 
-Usage Guide
-Registrations (Menu “Cadastros”):
-Open VUC/TOCO/TRUCK forms to create, read, update, or delete records.
-After a successful save, the form closes automatically (dispose()) and you return to the main window.
-Reports (Menu “Relatorios”):
-Open the desired report (VUC/TOCO/TRUCK).
-The table is refreshed on open using atualizarTabela().
-Developer tips:
+## Author
 
-Open report forms like this from the main menu:
+Made by **RicardoMarchezan**
 
-FormRelVuc.getInstance().atualizarTabela().setVisible(true);
-To ensure a single instance per window, always access forms via getInstance().
-Data Model
-Vuc
-placa, marca, ano, circulaCentro (boolean), refrigerado (boolean)
-Toco
-placa, marca, ano, tipoCarroceria, autonomiaKm (int)
-Truck
-placa, marca, ano, qtdEixosTraseiros (int), tipoSuspensao
-Primary key for lookups: placa. Data is reset each time the app starts.
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-RicardoMarchezan-blue)](https://www.linkedin.com/in/ricardo-marchezan-801808288/)
+[![GitHub](https://img.shields.io/badge/GitHub-ricardomarchezan-black)](https://github.com/ricardomarchezan)
 
-Troubleshooting
-A report opens the wrong window:
-Ensure the menu action calls the correct class:
 
-FormRelVuc.getInstance().atualizarTabela().setVisible(true);
-“Cannot find atualizarTabela()” on report calls:
-Fix the Singleton in the report forms so getInstance() returns the correct FormRelXxx type (not FormVuc).
-Closing a child form closes the entire app:
-Use DISPOSE_ON_CLOSE for registration/report forms; keep EXIT_ON_CLOSE only on FormPrincipal.
-Tiny or empty windows:
-Make sure the constructor calls initComponents() and pack(). The GUI Builder places pack() at the end of initComponents()—do not remove it.
-Close the registration form after saving:
-On successful save, call this.dispose() in the Save button handler.
-Roadmap
-Persist data using an embedded database (SQLite/H2 via JDBC)
-Export and print reports (CSV/Excel/PDF)
-Sorting and filtering within JTables
-Unit tests for models and repositories (JUnit)
-Internationalization (pt-BR/en-US) and custom Look & Feel
-Input masks and richer validations (e.g., license plate masks)
-Explicit MVC layering (Controller/Service classes)
-License
-Recommended: MIT License. Include a LICENSE file in the repository.
 
-Author
-Ricardo — Developer and UI
-Open to feedback, contributions, and freelance opportunities
-Why this project stands out:
-
-Demonstrates practical Swing proficiency with clean UI patterns
-Applies correct window lifecycle and single-instance form handling
-Clear, extensible code that’s easy to evolve (persistence, exports, filters)
-Strong UX focus for desktop applications
