@@ -17,7 +17,6 @@ This project serves as an excellent portfolio piece, demonstrating proficiency i
 - [Overview](#overview)
 - [Features](#features)
 - [Architecture and Design Decisions](#architecture-and-design-decisions)
-- [Screenshots](#screenshots)
 - [Technologies Used](#technologies-used)
 - [Getting Started](#getting-started)
 - [Future Roadmap](#future-roadmap)
@@ -53,17 +52,6 @@ The application's navigation is centralized in a main window (`FormPrincipal`), 
   - **Controller/Repository (Simplified)**: "Database" classes (`BDVuc`, `BDToco`) that manage the in-memory object collections and contain business logic.
 - **On-Demand UI Updates**: Reports are repopulated via the `atualizarTabela()` method, which is explicitly called before displaying the window, ensuring data is always synchronized.
 
-## Screenshots
-
-> **Note:** Create a folder named `assets` or `docs/images` in your project's root directory and place your screenshots there. Then, update the file paths below accordingly.
-
-| Main Window | VUC Registration |
-| :---: | :---: |
-| ![Main Window](assets/main-window.png) | ![VUC Registration Form](assets/form-vuc.png) |
-
-| Toco Report | Truck Report |
-| :---: | :---: |
-| ![Toco Report](assets/report-toco.png) | ![Truck Report](assets/report-truck.png) |
 
 ## Technologies Used
 
